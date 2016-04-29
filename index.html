@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/animate.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <link href="css/icheck/flat/green.css" rel="stylesheet">
+  <script src="js/jquery.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+    
+    	$("#user_register").click(function(){
+      		window.location.replace("register.php");
+        }); 
+    
+       	$("#log_in").click(function(){
+      		var data = $("#login_form :input").serializeArray();
+        	$.post($("#login_form").attr("action"), 
+        		data, 
+              		function(info){
+                		if (info == "Logged in Successfully") {
+                  			var username = $("#uid").val();
+                  			document.getElementById('login_form').action = 'home.php?uid='+username;
+                  			$("#login_form").submit();
+                		} else {
+                  			$("#comments").html(info);
+                		}
+                
+              	}).fail(function() {
+              			alert( "Something went wrong. Please try again" );
+          	});
+        }); 
+                
+    });
+  </script>
+</head>
+
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav class="" role="navigation">
+          </nav>
+        </div>
+      </div>
+
+      <div role="main">
+        <div class="">
+
+          <div class="page-title">
+            <div class="well" style="text-align: center;">
+              <h3 style="color: black;">Fantasy Premier League Draft</h3>
+            </div>
+        </div>
+          <div class="clearfix"></div>
+          <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12" style="margin-left: 160px;margin-top: 50px; width: 50%">
+              <div class="x_panel">
+                <div class="x_title" style="text-align: center;">
+                  <div style="font-size: 22px;">Login</div>
+
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <br />
+
+
+
+                  <form id="login_form" action="queries/login_query.php" method="post" class="form-horizontal form-label-left">
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" name="uid" id="uid" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Password<span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="password" name="pass" id="pass" required="required" class="form-control col-md-7 col-xs-12">
+                      </div>
+                    </div>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                      <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="button" id="log_in" name="log_in" class="btn btn-success">Submit</button>
+                        <button type="button" id="user_register" name="user_register" style = "margin-left: 80px;" class="btn btn-primary">Register</button>
+                      </div>
+                    </div>
+
+                  </form>
+
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12" style="margin-left: 60px; margin-top: 50px; width: 30% ">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>League Table</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Position</th>
+                        <th>Club</th>
+                        <th>Points</th>
+                        <th>GD</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Chelsea</td>
+                        <td>75</td>
+                        <td>+26</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Leicester City</td>
+                        <td>73</td>
+                        <td>+23</td>
+                      </tr>
+
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Arsenal</td>
+                        <td>71</td>
+                        <td>+20</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+  </div>
+  <p id="comments"></p>
+
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="js/icheck/icheck.min.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/pace/pace.min.js"></script>
+</body>
+
+</html>
